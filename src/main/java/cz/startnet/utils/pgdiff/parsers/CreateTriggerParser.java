@@ -103,8 +103,11 @@ public class CreateTriggerParser {
             trigger.setWhen(parser.getExpression());
             parser.expect(")");
         }
-
-        parser.expect("EXECUTE", "PROCEDURE");
+    
+        parser.expect("EXECUTE");
+        parser.expectOptional("PROCEDURE");
+        parser.expectOptional("FUNCTION");
+        
         trigger.setFunction(parser.getRest());
 
         final boolean ignoreSlonyTrigger = ignoreSlonyTriggers
